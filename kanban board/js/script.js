@@ -16,13 +16,12 @@ window.addEventListener('DOMContentLoaded', () => {
 	let addThis = document.querySelectorAll('.card__option-addthis .icon-addthis'),
 		cardContent = document.querySelectorAll('.card__content');
 	const parent = document.querySelector('.card__row');
+	// let cardText = document.querySelectorAll('.card__text');
 	
 	
 	function addText(j) {
 		let div = document.createElement('div');
 		div.classList.add('card__text');
-
-		
 
 		for (let i = 0; i < 1; i++) {
 			let text = prompt('Введите название пункта', '').trim();
@@ -39,7 +38,9 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 		renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
 		name = document.querySelectorAll('.card__text p');
-		return renameText, name;
+		deleteText = document.querySelectorAll('.card__text-bin .icon-bin');
+		cardText = document.querySelectorAll('.card__text');
+		return renameText, name, deleteText, cardText;
 	}
 	
 
@@ -54,58 +55,6 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 		}
 	});
-
-
-
-
-
-
-	// появление опций у пунктов при наведении
-
-
-	let cardText = document.querySelectorAll('.card__text');
-
-	
-	// function addOption(p) {
-	// 	let cardTextActive = document.createElement('div');
-	// 	cardTextActive.classList.add('card__text-active');
-	// 	cardTextActive.innerHTML = `<div class="card__option-pencil"><span class="icon-pencil"></span></div>
-	// 								<div class="card__option-bin"><span class="icon-bin"></span></div>`
-	// 	cardText[p].append(cardTextActive);
-	// 	return cardTextActive;
-	// }
-
-	
-
-
-	// cardText[0].addEventListener('mouseenter', (event) => {
-	// 	const target = event.target;
-	// 	console.log(target);
-	// 	if (target && target.matches('.card__content .card__text')) {
-	// 	 		cardText.forEach((item, p) => {
-	// 	 			if (target == item) {
-	// 	 				addOption(p);
-	// 	 			}
-	// 	 		});
-	// 	}
-	// });
-
-
-	// cardText[0].addEventListener('mouseleave', (event) => {
-	// 	const target = event.target;
-	// 	console.log(target);
-	// 	if (target && target.matches('.card__content .card__text')) {
-	// 		cardText.forEach((item, p) => {
-	// 			if (target == item) {
-	// 				// hideOption();
-	// 			}
-	// 		});
-	// 	}
-	// });
-
-
-
-
 
 
 	// добавление новой карточки
@@ -182,23 +131,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	}	
 
 
-	// function renameCardText(element) {
-	// 	if (target && target.matches(element)) {
-	// 		element.forEach((item, k) => {
-	// 			if (target == item) {
-	// 				element = document.querySelectorAll(element);
-	// 				renameItem(k);
-
-	// 			}
-	// 		});
-	// 	}
-
-		
-	// }
-
-	// console.log(renameCardText('.card__option-pencil .icon-pencil'));
-	// console.log(renameCardText('.card__text-pencil .icon-pencil'));
-
 	parent.addEventListener('click', (event) => {
 		const target = event.target;
 		if (target && target.matches('.card__option-pencil .icon-pencil')) {
@@ -230,7 +162,9 @@ window.addEventListener('DOMContentLoaded', () => {
 		item = document.querySelectorAll('.card__item');
 		renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
 		name = document.querySelectorAll('.card__text p');
-		return binCard, item, renameText, name;
+		deleteText = document.querySelectorAll('.card__text-bin .icon-bin');
+		cardText = document.querySelectorAll('.card__text');
+		return binCard, item, renameText, name, deleteText, cardText;
 	}
 
 	parent.addEventListener('click', (event) => {
@@ -248,9 +182,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-// изменение названия пункта
-	
 
+
+// изменение названия пункта
 	
 	function renameCardText(k) {
 		for (let i = 0; i < 1; i++) {
@@ -277,6 +211,47 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 	});
+
+
+	
+
+	// удаление пункта в карточке
+
+	let cardText = document.querySelectorAll('.card__text');
+	let deleteText = document.querySelectorAll('.card__text-bin .icon-bin');
+
+
+	function deleteCardText(k) {
+		for (let i = 0; i < 1; i++) {
+			let name = confirm('Вы дейсвительно хотите удалить эту карточку?');
+			if (name == true) {
+				cardText[k].remove();
+			}
+		}
+		renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
+		name = document.querySelectorAll('.card__text p');
+		cardText = document.querySelectorAll('.card__text');
+		deleteText = document.querySelectorAll('.card__text-bin .icon-bin');
+		return renameText, name, cardText, deleteText;
+	}
+
+
+
+	parent.addEventListener('click', (event) => {
+		const target = event.target;
+		if (target && target.matches('.card__text-bin .icon-bin')) {
+			deleteText.forEach((item, k) => {
+				if (target == item) {
+					console.log('done');
+					// deleteText = document.querySelectorAll('.card__text-bin .icon-bin');
+					deleteCardText(k);
+
+				}
+			});
+		}
+
+	});
+
 
 
 });
