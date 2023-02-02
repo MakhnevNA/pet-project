@@ -1,100 +1,29 @@
 @charset "UTF-8";
 
 /* обнуление*/
-* {
-	padding: 0;
-	margin: 0;
-	border: 0;
-}
+* {padding: 0;margin: 0;border: 0;}
+*,*:before,*:after {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
+:focus,:active {outline: none;}
+a:focus,a:active {outline: none;}
+nav,footer,header,aside {display: block;}
+html,body {height: 100%;width: 100%;font-size: 100%;line-height: 1;font-size: 14px;-ms-text-size-adjust: 100%;-moz-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;}
+input,button,textarea {font-family: inherit;}
+input::-ms-clear {display: none;}/*крестик в поле для ввода в  интернете explorer*/
+button {cursor: pointer;}
+button::moz-focus-inner {padding: 0;border: 0;}
+a,a:visited {text-decoration: none;}
+a:hover {text-decoration: none;}
+ul li {list-style: none;}
+img {vertical-align: top;}
+h1,h2,h3,h4,h5,h6 {	font-size: inherit;	font-weight: 400;}
 
-*,
-*:before,
-*:after {
-	/* при установке опрделнной ширине блока отступы тоже будут входить в эти значения, кроме margin*/
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
+/*                                                                                            */
+.wrapper{
+	background-color: rgb(234, 147, 17);
 }
-
-:focus,
-:active {
-	outline: none;
-}
-
-a:focus,
-a:active {
-	outline: none;
-}
-
-nav,
-footer,
-header,
-aside {
-	display: block;
-}
-
-html,
-body {
-	height: 100%;
-	width: 100%;
-	font-size: 100%;
-	line-height: 1;
-	font-size: 14px;
-	-ms-text-size-adjust: 100%;
-	-moz-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%;
-}
-
-input,
-button,
-textarea {
-	font-family: inherit;
-}
-
-input::-ms-clear {
-	display: none;
-}
-
-/*крестик в поле для ввода в  интернете explorer*/
-button {
-	cursor: pointer;
-}
-
-button::moz-focus-inner {
-	padding: 0;
-	border: 0;
-}
-
-a,
-a:visited {
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
-ul li {
-	list-style: none;
-}
-
-img {
-	vertical-align: top;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-size: inherit;
-	font-weight: 400;
-}
-
 
 .container {
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	max-width: 1052px;
 	margin: 0 auto;
 	min-height: 700px;
@@ -121,7 +50,7 @@ h6 {
 .card__item{
 	border: 2px solid green;
 	max-height: 420px;
-	min-height: 203px;
+	min-height: 213px;
 	height: 100%;
 	width: 320px;
 	margin: 15px 15px;
@@ -181,11 +110,6 @@ h6 {
 .card__content{
 	overflow: auto;
 	margin: 0 0 20px 0;
-	
-	
-	/* max-height: 400px; */
-	
-	
 }
 .card__content::-webkit-scrollbar {
 	background-color: rgb(230, 230, 230);
@@ -217,6 +141,7 @@ h6 {
 	border: 1px solid #ffffff;
 	border-radius: 5px;
 	position: relative;
+	cursor: move;
 	
 }
 
@@ -244,25 +169,25 @@ h6 {
 
 
 .card__text:hover .card__text-active {
-	
 	color: #ff6550;
-	/* cursor: pointer; */
 	opacity: 1;
-	
 }
 
 
 
 
-.icon-addthis {
+.icon-addthis,
+.icon-pencil,
+.icon-bin{
 	font-size: 14px;
 }
 
-.icon-pencil {
-	font-size: 14px;
+
+.card__text.dragging{
+	opacity: 0.5;
 }
 
-.icon-bin {
-	font-size: 14px;
+.card__text:hover.dragging .card__text-active {
+	opacity: 0;
+	transform: opacity 0s;
 }
-

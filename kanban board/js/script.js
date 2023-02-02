@@ -3,25 +3,36 @@
 window.addEventListener('DOMContentLoaded', () => {
 	
 
-	
+
+	const parent = document.querySelector('.card__row'),
+		globalAdd = document.querySelector('.global__option-addthis');
+
+	let addThis = document.querySelectorAll('.card__option-addthis .icon-addthis'),
+		renameCard = document.querySelectorAll('.card__option-pencil .icon-pencil'), 
+		binCard = document.querySelectorAll('.card__option-bin .icon-bin'), 
+		renameText = document.querySelectorAll('.card__text-pencil .icon-pencil'), 
+		deleteText = document.querySelectorAll('.card__text-bin .icon-bin'), 
+		cardContent = document.querySelectorAll('.card__content'),
+		item = document.querySelectorAll('.card__item'),
+		name = document.querySelectorAll('.card__text p'), 
+		cardText = document.querySelectorAll('.card__text'), 
+			titleItem = document.getElementsByClassName('card__name'), // это поменять на
+			nameItem = document.querySelectorAll('.card__name'); // это, где то есть 1-2 таких, там еще через живую коллекцию
+		
+		
 
 	// сделать потом функцию изменения названия листа универсальной, чтобы можно было еще и пункты менять.
 	// то есть надо в функции использовать везде параметры, а уже потом при клике на нужный карандаш передавать значения
 
 
 
-
 	// добавление пункта в карточке
-
-	let addThis = document.querySelectorAll('.card__option-addthis .icon-addthis'),
-		cardContent = document.querySelectorAll('.card__content');
-	const parent = document.querySelector('.card__row');
-	// let cardText = document.querySelectorAll('.card__text');
-	
 	
 	function addText(j) {
 		let div = document.createElement('div');
 		div.classList.add('card__text');
+		div.setAttribute('draggable', 'true');
+
 
 		for (let i = 0; i < 1; i++) {
 			let text = prompt('Введите название пункта', '').trim();
@@ -55,21 +66,12 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 		}
 	});
+	
+
+
 
 
 	// добавление новой карточки
-
-	const globalAdd = document.querySelector('.global__option-addthis');
-	let titleItem = document.getElementsByClassName('card__name');
-	let liveCard = document.getElementsByClassName('card__item');
-	let rename = document.querySelectorAll('.card__option-pencil .icon-pencil');
-	let nameItem = document.querySelectorAll('.card__name');
-	let binCard = document.querySelectorAll('.card__option-bin .icon-bin');
-	let item = document.querySelectorAll('.card__item');
-	let renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
-	let name = document.querySelectorAll('.card__text p');
-
-	
 
 	function addNewList() {
 		const newList = document.createElement('div');
@@ -86,14 +88,15 @@ window.addEventListener('DOMContentLoaded', () => {
 							<div class="card__content"></div>`
 		
 		parent.append(newList);
-		rename = document.querySelectorAll('.card__option-pencil .icon-pencil');
+		renameCard = document.querySelectorAll('.card__option-pencil .icon-pencil');
 		addThis = document.querySelectorAll('.card__option-addthis .icon-addthis');
 		cardContent = document.querySelectorAll('.card__content');
 		binCard = document.querySelectorAll('.card__option-bin .icon-bin');
 		item = document.querySelectorAll('.card__item');
 		nameItem = document.querySelectorAll('.card__name');
 		name = document.querySelectorAll('.card__text p');
-		return rename, addThis, cardContent, binCard, item, nameItem, name;
+		cardText = document.querySelectorAll('.card__text');
+		return renameCard, addThis, cardContent, binCard, item, nameItem, name, cardText;
 		
 	}
 
@@ -134,11 +137,10 @@ window.addEventListener('DOMContentLoaded', () => {
 	parent.addEventListener('click', (event) => {
 		const target = event.target;
 		if (target && target.matches('.card__option-pencil .icon-pencil')) {
-			rename.forEach((item, k) => {
+			renameCard.forEach((item, k) => {
 				if (target == item) {
-					rename = document.querySelectorAll('.card__option-pencil .icon-pencil');
+					renameCard = document.querySelectorAll('.card__option-pencil .icon-pencil');
 					renameItem(k);
-					
 				}
 			});
 		}
@@ -164,14 +166,14 @@ window.addEventListener('DOMContentLoaded', () => {
 		name = document.querySelectorAll('.card__text p');
 		deleteText = document.querySelectorAll('.card__text-bin .icon-bin');
 		cardText = document.querySelectorAll('.card__text');
-		return binCard, item, renameText, name, deleteText, cardText;
+		cardContent = document.querySelectorAll('.card__content');
+		return binCard, item, renameText, name, deleteText, cardText, cardContent;
 	}
 
 	parent.addEventListener('click', (event) => {
 		const target = event.target;
 
 		if (target && target.matches('.card__option-bin .icon-bin')) {
-			console.log('done');
 			binCard.forEach((item, p) => {
 				if (target == item) {
 					deleteCArd(p);
@@ -195,6 +197,8 @@ window.addEventListener('DOMContentLoaded', () => {
 				i--;
 			}
 		}
+		cardText = document.querySelectorAll('.card__text');
+		return cardText;
 	}
 
 	parent.addEventListener('click', (event) => {
@@ -204,22 +208,15 @@ window.addEventListener('DOMContentLoaded', () => {
 				if (target == item) {
 					renameText = document.querySelectorAll('.card__text-pencil .icon-pencil');
 					renameCardText(k);
-
 				}
 			});
 		}
-
-
 	});
 
 
 	
 
 	// удаление пункта в карточке
-
-	let cardText = document.querySelectorAll('.card__text');
-	let deleteText = document.querySelectorAll('.card__text-bin .icon-bin');
-
 
 	function deleteCardText(k) {
 		for (let i = 0; i < 1; i++) {
@@ -242,10 +239,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		if (target && target.matches('.card__text-bin .icon-bin')) {
 			deleteText.forEach((item, k) => {
 				if (target == item) {
-					console.log('done');
-					// deleteText = document.querySelectorAll('.card__text-bin .icon-bin');
 					deleteCardText(k);
-
 				}
 			});
 		}
@@ -253,5 +247,49 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 
+	
 
+	// drag and drop
+
+	cardText.forEach(item => {
+		item.addEventListener('dragstart', () => {
+			item.classList.add('dragging');
+		});
+
+		item.addEventListener('dragend', () => {
+			item.classList.remove('dragging');
+		});
+	});
+
+	
+	cardContent.forEach(container => {
+		container.addEventListener('dragover', (e) => {
+			e.preventDefault();
+			const afterElement = getDragAfterElement(container, e.clientY);
+			let draggable = document.querySelector('.dragging');
+			if (afterElement == null) {
+				container.appendChild(draggable);
+			} else {
+				container.insertBefore(draggable, afterElement)
+			}
+			// container.appendChild(draggable);
+			
+		})
+	});
+
+// определение между каким элементами мы находимся
+	
+	function getDragAfterElement(container, y) {
+		const draggableElements = [...container.querySelectorAll('.card__text:not(.dragging)')]; // исключаем элемент, который сейчас держим.и со спредом преобразовываем в массив
+		return draggableElements.reduce((closest, child) => {
+			const box = child.getBoundingClientRect();
+			const offset = y - box.top - box.height / 2;
+			if (offset < 0 && offset > closest.offset) {
+				return { offset: offset, element:child }
+			} else {
+				return closest;
+			}
+		}, {offset: Number.NEGATIVE_INFINITY}).element 
+	}
+	
 });
